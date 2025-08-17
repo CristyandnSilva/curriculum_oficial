@@ -1,0 +1,92 @@
+{
+  "entities": [
+    {
+      "name": "TAXI",
+      "attributes": [
+        {"name": "id_taxi", "type": "int", "pk": true, "nn": true},
+        {"name": "placa", "type": "varchar(10)", "uk": true, "nn": true},
+        {"name": "modelo", "type": "varchar(50)"},
+        {"name": "ano", "type": "int"},
+        {"name": "status", "type": "varchar(20)"}
+      ]
+    },
+    {
+      "name": "MOTORISTA",
+      "attributes": [
+        {"name": "id_motorista", "type": "int", "pk": true, "nn": true},
+        {"name": "nome", "type": "varchar(100)", "nn": true},
+        {"name": "cnh", "type": "varchar(20)", "uk": true, "nn": true},
+        {"name": "data_admissao", "type": "date"},
+        {"name": "situacao", "type": "varchar(20)"}
+      ]
+    },
+    {
+      "name": "TURNO",
+      "attributes": [
+        {"name": "id_turno", "type": "int", "pk": true, "nn": true},
+        {"name": "nome", "type": "varchar(30)", "nn": true},
+        {"name": "hora_inicio", "type": "time"},
+        {"name": "hora_fim", "type": "time"}
+      ]
+    },
+    {
+      "name": "AREA",
+      "attributes": [
+        {"name": "id_area", "type": "int", "pk": true, "nn": true},
+        {"name": "nome", "type": "varchar(100)"}
+      ]
+    },
+    {
+      "name": "RUA",
+      "attributes": [
+        {"name": "id_rua", "type": "int", "pk": true, "nn": true},
+        {"name": "nome", "type": "varchar(100)", "uk": true, "nn": true},
+        {"name": "extensao_metros", "type": "int"}
+      ]
+    },
+    {
+      "name": "ESCALA",
+      "attributes": [
+        {"name": "id_escala", "type": "int", "pk": true, "nn": true},
+        {"name": "data", "type": "date", "nn": true}
+      ]
+    },
+    {
+      "name": "RUA_AREA",
+      "attributes": [
+        {"name": "id_rua", "type": "int", "pk": true, "nn": true},
+        {"name": "id_area", "type": "int", "pk": true, "nn": true}
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "name": "MotoristaEscala",
+      "entities": [
+        {"entity": "MOTORISTA", "cardinality": "1,N"},
+        {"entity": "ESCALA", "cardinality": "N,1"}
+      ]
+    },
+    {
+      "name": "TaxiEscala",
+      "entities": [
+        {"entity": "TAXI", "cardinality": "1,N"},
+        {"entity": "ESCALA", "cardinality": "N,1"}
+      ]
+    },
+    {
+      "name": "TurnoEscala",
+      "entities": [
+        {"entity": "TURNO", "cardinality": "1,N"},
+        {"entity": "ESCALA", "cardinality": "N,1"}
+      ]
+    },
+    {
+      "name": "RuaArea",
+      "entities": [
+        {"entity": "RUA", "cardinality": "N,N"},
+        {"entity": "AREA", "cardinality": "N,N"}
+      ]
+    }
+  ]
+}
